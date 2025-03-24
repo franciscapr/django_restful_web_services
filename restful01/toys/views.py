@@ -14,14 +14,14 @@ class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
-        super(JSONRenderer, self).__init__(content, **kwargs)
+        super(JSONResponse, self).__init__(content, **kwargs)
 
 @csrf_exempt
 def toy_list(request):
     if request.method == 'GET':
         toys = Toy.objects.all()
         toys_serializer = ToySerializer(toys, many=True)    # many=True especifica que deben serializarse varias instancias, no solo una
-        return JSONRenderer(toys_serializer.data)
+        return JSONResponse(toys_serializer.data)
     
     elif request.method == 'POST':    # La respuesta viene en formato json
         toy_data = JSONParser().parse(request)    # con parse la convertimos en formato dic
