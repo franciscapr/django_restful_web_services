@@ -20,7 +20,7 @@ class JSONResponse(HttpResponse):
 def toy_list(request):
     if request.method == 'GET':
         toys = Toy.objects.all()
-        toys_serializer = ToySerializer(toys, many=True)
+        toys_serializer = ToySerializer(toys, many=True)    # many=True especifica que deben serializarse varias instancias, no solo una
         return JSONRenderer(toys_serializer.data)
     
     elif request.method == 'POST':    # La respuesta viene en formato json
@@ -34,9 +34,9 @@ def toy_list(request):
                             status=status.HTTP_400_BAD_REQUEST)
     
 @csrf_exempt
-def toy_detail(request, pk):
+def toy_detail(request, pk):   # tenemos pk como argumento y request. pk-->identificador
     try:
-        toy = Toy.objects.get(pk=pk)
+        toy = Toy.objects.get(pk=pk)    # recuperamos el objeto segun el pk y lo guardamos en toy
     except Toy.DoesNotExist:
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
     
