@@ -20,3 +20,25 @@ def toy_list(request):
             return Response(toy_serializer.data, status=status.HTTP_201_CREATED)
         return Response(toy_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+@api_view(['GET', 'PUT', 'DELETE'])
+def toy_detail(request, pk):
+
+    try:
+        toy = Toy.objects.get(pk=pk)
+    except Toy.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        toy_serializer = ToySerializer(toy)
+        return Response(toy_serializer.data)
+    
+    elif request.method == 'PUT':
+        toy_serializer = ToySerializer(toy, data=request.data)
+        if toy_serializer.is_valid():
+            toy_serializer.save()
+            return Response(toy_serializer.data)
+        return Response(toy_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        toy.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
