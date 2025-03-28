@@ -19,6 +19,7 @@ def toy_list(request):
             toy_serializer.save()
             return Response(toy_serializer.data, status=status.HTTP_201_CREATED)
         return Response(toy_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     
 @api_view(['GET', 'PUT', 'DELETE'])
 def toy_detail(request, pk):
