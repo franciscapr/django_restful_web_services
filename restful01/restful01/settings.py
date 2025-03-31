@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # Toys applicarions
-    'toys.apps.ToysConfig',
+    #'toys.apps.ToysConfig',
+    
+    # Drones application
+    'drones.apps.DronesConfig',
 
 ]
 
