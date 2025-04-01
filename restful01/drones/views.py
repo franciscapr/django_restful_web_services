@@ -45,3 +45,8 @@ class CompetitionList(generics.ListCreateAPIView):
     queryset = Competition.objects.all()
     serializer_class = PilotCompetitionSerializer
     name = 'competition-list'
+
+class CompetitionDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Competition.objects.all()
+    serializer_class = PilotCompetitionSerializer
+    name = 'competition-detail'
