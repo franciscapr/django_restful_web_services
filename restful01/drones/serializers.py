@@ -71,3 +71,22 @@ class PilotSerializer(serializers.HyperlinkedModelSerializer):
             'races_timestamp',
             'competitions'
         )
+
+class PilotCompetitionSerializer(serializers.ModelSerializer):
+    # Display the pilot`s name
+    pilot = serializers.SlugRelatedField(queryset=Pilot.objects.all(),
+                                         slug_field='name')
+    # Display the drone`s name
+    drone = serializers.SlugRelatedField(queryset=Drone.objects.all(),
+                                         slug_field='name')
+    
+    class Meta:
+        model = Competition
+        fields = (
+            'url',
+            'pk',
+            'distance_in_feet',
+            'distance_achievement_date',
+            'pilot',
+            'drone'
+        )
