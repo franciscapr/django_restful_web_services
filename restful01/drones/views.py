@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from rest_framework.response import reverse
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from drones.models import DroneCategory
 from drones.models import Drone
 from drones.models import Pilot
@@ -50,3 +51,13 @@ class CompetitionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Competition.objects.all()
     serializer_class = PilotCompetitionSerializer
     name = 'competition-detail'
+
+
+class ApiRoot(generics.GenericAPIView):
+    name = 'api-root'
+    def get(self, request, *args, **kwargs):
+        return Response({
+            'drone-categories': reverse(DroneCategoryList.name, request=request),
+            'drones': reverse(PilotList.name, request=request),
+            'competitions': reverse(CompetitionList.name, request=request)
+        })
