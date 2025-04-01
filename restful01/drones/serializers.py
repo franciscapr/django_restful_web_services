@@ -68,7 +68,8 @@ class PilotSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'gender',
             'gender_description',
-            'races_timestamp',
+            'races_count',
+            'inserted_timestamp',
             'competitions'
         )
 
