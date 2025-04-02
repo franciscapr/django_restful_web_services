@@ -10,8 +10,7 @@ from drones.serializers import DroneCategorySerializer
 from drones.serializers import DroneSerializer
 from drones.serializers import PilotSerializer
 from drones.serializers import PilotCompetitionSerializer
-from rest_framework import filters
-from django_filters import AllValuesFilter, DateTimeFilter, NumberFilter
+from django_filters.rest_framework import FilterSet, DateTimeFilter, NumberFilter, AllValuesFilter
 
 
 
@@ -81,13 +80,19 @@ class PilotDetail(generics.RetrieveUpdateDestroyAPIView):
     name = 'pilot-detail'
 
 
-class CompetitionFilter(filters.FilterSet):
-    from_achievement_date = DateTimeFilter(name='distance_achievement_date', lookup_expr='gte')
-    to_achievement_date = DateTimeFilter(name='distance_achievement_date', lookup_expr='lte')
-    min_distance_in_feet = NumberFilter(name='distance_in_feet', lookup_expr='gte')
-    max_distance_in_feet = NumberFilter(name='distance_in_feet', lookup_expr='lte')
-    drone_name = AllValuesFilter(name='drone__name')
-    pilot_name = AllValuesFilter(name='pilot__name')
+class CompetitionFilter(FilterSet):
+    from_achievement_date = DateTimeFilter(
+        field_name='distance_achievement_date', lookup_expr='gte')
+    to_achievement_date = DateTimeFilter(
+        field_name='distance_achievement_date', lookup_expr='lte')
+    min_distance_in_feet = NumberFilter(
+        field_name='distance_in_feet', lookup_expr='gte')
+    max_distance_in_feet = NumberFilter(
+        field_name='distance_in_feet', lookup_expr='lte')
+    drone_name = AllValuesFilter(
+        field_name='drone__name')
+    pilot_name = AllValuesFilter(
+        field_name='pilot__name')
 
     class Meta:
         model = Competition
@@ -97,18 +102,15 @@ class CompetitionFilter(filters.FilterSet):
             'to_achievement_date',
             'min_distance_in_feet',
             'max_distance_in_feet',
-            # drone__name will be accessed as drone_name
             'drone_name',
-            # pilot__name will be accessed as pilot_name
             'pilot_name',
         )
-
 
 class CompetitionList(generics.ListCreateAPIView):
     queryset = Competition.objects.all()
     serializer_class = PilotCompetitionSerializer
     name = 'competition-list'
-    filter_class = CompetitionFilter
+    filterset_class = CompetitionFilter 
     ordering_fields = (
         'distance_in_feet',
         'distance_achievement_date',
