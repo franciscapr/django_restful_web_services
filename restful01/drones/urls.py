@@ -1,6 +1,9 @@
 from django.urls import path, re_path
 from drones import views
 
+
+app_name = 'v1'
+
 urlpatterns = [
     path('drone-categories/', views.DroneCategoryList.as_view(), name=views.DroneCategoryList.name),
     path('drone-categories/<int:pk>', views.DroneCategoryDetail.as_view(), name=views.DroneCategoryDetail.name),
