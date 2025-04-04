@@ -21,4 +21,5 @@ from django.conf.urls import include
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', include('drones.urls')),
+    path('api-auth/', include('rest_framework.urls'))
 ]

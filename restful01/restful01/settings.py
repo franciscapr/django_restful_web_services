@@ -46,13 +46,16 @@ INSTALLED_APPS = [
 
     # Django REST framework
     'rest_framework',
+    # Drones application
+    'drones.apps.DronesConfig',
+
     'django_filters',
+    # Token authentication
+    'rest_framework.authtoken',
 
     # Toys applicarions
     #'toys.apps.ToysConfig',
 
-    # Drones application
-    'drones.apps.DronesConfig',
 
 ]
 
