@@ -2,7 +2,7 @@ from django.urls import path, re_path
 from drones import views
 
 
-app_name = 'v1'
+#app_name = 'v1'
 
 urlpatterns = [
     path('drone-categories/', views.DroneCategoryList.as_view(), name=views.DroneCategoryList.name),

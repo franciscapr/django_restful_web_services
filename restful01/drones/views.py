@@ -16,22 +16,23 @@ from drones import custompermission
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.throttling import ScopedRateThrottle
-
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 class DroneCategoryList(generics.ListCreateAPIView):
     queryset = DroneCategory.objects.all()
     serializer_class = DroneCategorySerializer
     name = 'dronecategory-list'
-    filter_fields = (
-        'name',
-    )
-    search_fields = (
-        '^name',
-    )
-    ordering_fields = (
-        'name',
-    )
+
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    filterset_fields = ('name',)
+    search_fields = ('^name',)
+    ordering_fields = ('name',)
 
 class DroneCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = DroneCategory.objects.all()
