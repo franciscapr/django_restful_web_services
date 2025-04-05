@@ -44,5 +44,7 @@ python manage.py runserver
 Este proyecto sigue principios de diseño limpios y desacoplados. La idea es que pueda escalarse fácilmente, integrarse con frontend (React, Vue, etc.) o adaptarse a microservicios.
 
 ---
-[https://github.com/franciscapr/django_restful_web_services/blob/main/restful01/img/Captura%20desde%202025-04-05%2012-25-24.png]
-[https://github.com/franciscapr/django_restful_web_services/blob/main/restful01/img/Captura%20desde%202025-04-05%2012-25-45.png]
+![Api Browser - Root](https://raw.githubusercontent.com/franciscapr/django_restful_web_services/main/restful01/img/Captura%20desde%202025-04-05%2012-25-24.png)
+
+![Api Browser - DroneCategoryList](https://raw.githubusercontent.com/franciscapr/django_restful_web_services/main/restful01/img/Captura%20desde%202025-04-05%2012-25-45.png)
+
